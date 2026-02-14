@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polis Blog API",
+    "version": "1.0.0",
+    "description": "API для простого блога: статьи и комментарии."
+  },
+  "servers": [
+    { "url": "http://localhost:8080/api", "description": "Локальная среда" }
+  ],
+  "tags": [
+    { "name": "Articles", "description": "Операции со статьями" },
+    { "name": "Comments", "description": "Операции с комментариями" }
+  ],
+  "paths": {
+    "/articles": {
+      "get": {
+        "tags": ["Articles"],
+        "summary": "Получить список статей",
+        "responses": {
+          "200": {
+            "description": "Список статей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "description": "Список статей",
+                      "items": { "$ref": "#/components/schemas/Article" }
+                    }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Articles"],
+        "summary": "Создать новую статью",
+        "requestBody": {
+          "required": true,
+          "description": "Данные для создания статьи",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string", "description": "Заголовок статьи", "example": "Мой заголовок" },
+                  "content": { "type": "string", "description": "Текст статьи", "example": "Мой текст" }
+                },
+                "required": ["title", "content"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Статья создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/Article" }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/{article}": {
+      "get": {
+        "tags": ["Articles"],
+        "summary": "Получить детальную статью (с комментариями)",
+        "parameters": [
+          {
+            "name": "article",
+            "in": "path",
+            "required": true,
+            "description": "ID статьи",
+            "schema": { "type": "integer", "example": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Детальная статья",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/ArticleWithComments" }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/{article}/comments": {
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Добавить комментарий к статье",
+        "parameters": [
+          {
+            "name": "article",
+            "in": "path",
+            "required": true,
+            "description": "ID статьи",
+            "schema": { "type": "integer", "example": 1 }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Данные для создания комментария",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "author_name": { "type": "string", "description": "Имя автора", "example": "Иван" },
+                  "content": { "type": "string", "description": "Текст комментария", "example": "Комментарий" }
+                },
+                "required": ["author_name", "content"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Комментарий создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/Comment" }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1, "description": "ID статьи" },
+          "title": { "type": "string", "example": "Заголовок", "description": "Заголовок статьи" },
+          "content": { "type": "string", "example": "Текст статьи...", "description": "Полный текст статьи" },
+          "created_at": { "type": "string", "example": "14.02.2026 12:34", "description": "Дата создания (d.m.Y H:i)" },
+          "updated_at": { "type": "string", "example": "14.02.2026 12:34", "description": "Дата обновления (d.m.Y H:i)" }
+        },
+        "required": ["id", "title", "content", "created_at", "updated_at"]
+      },
+      "ArticleWithComments": {
+        "type": "object",
+        "allOf": [
+          { "$ref": "#/components/schemas/Article" },
+          {
+            "type": "object",
+            "properties": {
+              "comments": {
+                "type": "array",
+                "description": "Комментарии к статье",
+                "items": { "$ref": "#/components/schemas/Comment" }
+              }
+            }
+          }
+        ]
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 10, "description": "ID комментария" },
+          "article_id": { "type": "integer", "example": 1, "description": "ID статьи" },
+          "author_name": { "type": "string", "example": "Иван", "description": "Имя автора комментария" },
+          "content": { "type": "string", "example": "Текст комментария", "description": "Текст комментария" },
+          "created_at": { "type": "string", "example": "14.02.2026 12:40", "description": "Дата создания (d.m.Y H:i)" },
+          "updated_at": { "type": "string", "example": "14.02.2026 12:40", "description": "Дата обновления (d.m.Y H:i)" }
+        },
+        "required": ["id", "article_id", "author_name", "content", "created_at", "updated_at"]
+      }
+    }
+  }
+}
