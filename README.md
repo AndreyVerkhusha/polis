@@ -1,6 +1,6 @@
 ````md
 После клонирования репозитория открыть папку с проектом:
-```
+
 cd backend
 docker compose up -d --build
 docker compose exec php sh
