@@ -1,0 +1,36 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.link {
+  text-decoration: none;
+  color: #111;
+}
+
+.active {
+  font-weight: 700;
+}
+
+.swagger {
+  text-decoration: none;
+  color: #111;
+  opacity: 0.8;
+}
+
+.main {
+  padding-top: 8px;
+}

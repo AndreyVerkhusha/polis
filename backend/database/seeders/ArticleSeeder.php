@@ -13,7 +13,7 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $articles = Article::factory()->count(5)->create();
+        $articles = Article::factory()->count(3)->create();
 
         foreach ($articles as $article) {
             Comment::factory()

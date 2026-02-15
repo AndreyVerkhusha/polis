@@ -1,0 +1,38 @@
+.title {
+  margin: 0 0 12px 0;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .cardLinkWrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .date {
+    font-size: 12px;
+    opacity: 0.75;
+  }
+
+  .cardTitle {
+    margin: 8px 0;
+  }
+
+  .cardLink {
+    text-decoration: none;
+    color: #111;
+  }
+
+  .preview {
+    white-space: pre-wrap;
+  }
+}

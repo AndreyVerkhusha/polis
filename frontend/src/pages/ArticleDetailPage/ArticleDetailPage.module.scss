@@ -1,0 +1,57 @@
+.sectionTitle {
+  margin-top: 22px;
+}
+
+.title {
+  margin: 10px 0 6px 0;
+}
+
+.date {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+
+.content {
+  white-space: pre-wrap;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.comments {
+  display: grid;
+  gap: 12px;
+
+  .commentCard {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .commentHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .commentDate {
+    font-size: 12px;
+    opacity: 0.75;
+  }
+
+  .commentText {
+    margin-top: 8px;
+    white-space: pre-wrap;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+
+  .error {
+    color: crimson;
+  }
+}
