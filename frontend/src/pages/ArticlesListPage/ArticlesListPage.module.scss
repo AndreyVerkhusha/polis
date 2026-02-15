@@ -25,6 +25,9 @@
 
   .cardTitle {
     margin: 8px 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .cardLink {
@@ -34,5 +37,8 @@
 
   .preview {
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
   }
 }

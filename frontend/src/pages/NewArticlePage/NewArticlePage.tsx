@@ -45,7 +45,7 @@ export function NewArticlePage() {
     <div>
       <h1 className={styles.title}>Новая статья</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <TextInput value={title} onChange={setTitle} placeholder="Заголовок" required />
+        <TextInput value={title} onChange={setTitle} placeholder="Заголовок" required maxLength={255} />
         <TextArea value={content} onChange={setContent} placeholder="Текст статьи" required rows={10} />
 
         {createArticleMutation.isError ? (
