@@ -7,3 +7,6 @@
 /dataSources/
 /dataSources.local.xml
 /watcherTasks.xml
+/phpunit.xml
+/inspectionProfiles/Project_Default.xml
+/vcs.xml
